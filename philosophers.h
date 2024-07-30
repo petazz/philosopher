@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   datasophers.h                                     :+:      :+:    :+:   */
+/*   philossophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgonzal2 <pgonzal2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef dataSOPHERS_H
-# define dataSOPHERS_H
+#ifndef philosSOPHERS_H
+# define philosSOPHERS_H
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -19,22 +19,32 @@
 #include <pthread.h>
 #include <sys/time.h>
 
+typedef struct s_philos
+{
+    pthread_t       thread;
+    pthread_mutex_t *forks;
+    int             id;
+    int             *dead;
+    int             n_philos;
+    size_t             time_to_die;
+    size_t             time_to_eat;
+    size_t             time_to_sleep;
+    size_t             num_times_to_eat;
+}   t_philos;
+
 typedef struct s_data
 {
-    pthread_mutex_t *forks;
-    int n_philos;
-    int time_to_die;
-    int time_to_eat;
-    int time_to_sleep;
-    int number_must_eat;
-    struct s_data *next;
+    int     dead_flag;
+    pthread_mutex_t dead_lock;
+    pthread_mutex_t meal_lock;
+    pthread_mutex_t write_lock;    
 }   t_data;
 
-void    init_struct(t_data *data);
-void    valid_arguments(char **argv, t_data *data);
-t_data    *new_node();
-void    push(t_data **philo);
-void    create_datas(t_data *data);
-int	ft_atoi(const char *str);
+void    init_struct(t_philos *philos);
+void    valid_arguments(char **argv, t_philos *philos);
+t_philos* new_node();
+void    push(t_philos **philo);
+void    create_philoss(t_philos *philos);
+int     ft_atoi(const char *str);
 
 #endif
