@@ -6,7 +6,7 @@
 /*   By: pgonzal2 <pgonzal2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 02:55:00 by pgonzal2          #+#    #+#             */
-/*   Updated: 2024/07/25 04:33:59 by pgonzal2         ###   ########.fr       */
+/*   Updated: 2024/07/31 03:03:33 by pgonzal2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,11 @@ int	ft_atoi(const char *str)
 		++i;
 	}
 	return (num * signo);
+}
+
+size_t get_current_time()
+{
+    struct timeval tv;
+    gettimeofday(&tv, NULL);
+    return (size_t)(tv.tv_sec * 1000 + tv.tv_usec / 1000);
 }
