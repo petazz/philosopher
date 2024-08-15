@@ -19,32 +19,50 @@
 #include <pthread.h>
 #include <sys/time.h>
 
-typedef struct s_philos
-{
-    pthread_t       thread;
-    pthread_mutex_t *forks;
-    int             id;
-    int             *dead;
-    int             n_philos;
-    size_t             time_to_die;
-    size_t             time_to_eat;
-    size_t             time_to_sleep;
-    size_t             num_times_to_eat;
-}   t_philos;
-
 typedef struct s_data
 {
-    int     dead_flag;
-    pthread_mutex_t dead_lock;
-    pthread_mutex_t meal_lock;
-    pthread_mutex_t write_lock;    
+    int				n_philos;
+    long			time_to_die;
+    long			time_to_eat;
+    long			time_to_sleep;
+    long			num_times_to_eat;
+    int				dead_flag;
+    long            time;
+    pthread_mutex_t	dead_lock;
+    pthread_mutex_t	meal_lock;
+    pthread_mutex_t	write_lock;
 }   t_data;
 
-void    init_struct(t_philos *philos);
-void    valid_arguments(char **argv, t_philos *philos);
-t_philos* new_node();
-void    push(t_philos **philo);
-void    create_philoss(t_philos *philos);
-int     ft_atoi(const char *str);
+typedef struct s_philos
+{
+    pthread_t		thread;
+    pthread_mutex_t	*fork_1;
+    pthread_mutex_t	*fork_2;
+    pthread_mutex_t	count_eat_lock;
+    pthread_mutex_t	last_time_to_eat_lock;
+	long			last_time_to_eat;
+	long			count_eat;
+    int				id;
+    int				dead;
+	t_data	*data;
+}   t_philos;
+
+
+void	    init_struct(t_data *philos);
+void        init_forks(t_data *data, pthread_mutex_t *forks);
+int		    valid_arguments(char **argv, t_data *philos);
+t_philos*	new_node();
+void	    push(t_philos **philo);
+int         create_philos(t_data *data, t_philos *philos, pthread_mutex_t *forks);
+long		ft_atoi(const char *str);
+void        philo_sleep(t_philos *philos);
+void        philo_think(t_philos *philos);
+void        philo_eat(t_philos *philos);
+int         is_dead(t_philos *philos);
+void	    print_str(char *str, t_philos *philo);
+void	    ft_usleep(int time);
+void	    print_str(char *str, t_philos *philo);
+long         get_current_time();
+void        take_fork(t_philos *philos);
 
 #endif

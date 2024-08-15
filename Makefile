@@ -6,13 +6,13 @@
 #    By: pgonzal2 <pgonzal2@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/23 18:00:27 by pgonzal2          #+#    #+#              #
-#    Updated: 2024/07/30 20:06:06 by pgonzal2         ###   ########.fr        #
+#    Updated: 2024/08/15 21:34:50 by pgonzal2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = clang
-CFLAGS = -Wall -Wextra -Werror
-NAME = philosophers
+CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=thread
+NAME = philo
 SRCS = main.c \
 		utils.c \
 		routine.c \
