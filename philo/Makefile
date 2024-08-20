@@ -6,7 +6,7 @@
 #    By: pgonzal2 <pgonzal2@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/23 18:00:27 by pgonzal2          #+#    #+#              #
-#    Updated: 2024/08/15 21:34:50 by pgonzal2         ###   ########.fr        #
+#    Updated: 2024/08/20 17:20:06 by pgonzal2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,9 @@ NAME = philo
 SRCS = main.c \
 		utils.c \
 		routine.c \
+		monitor.c \
+		init_struct.c \
+		utils_two.c \
 		
 
 OBJS = $(SRCS:.c=.o)
@@ -29,7 +32,7 @@ clean:
 	rm -f $(OBJS)
 	
 fclean: clean
-
+		rm -f $(NAME)
 re: fclean all
 
 .PHONY: all clean fclean re
